@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyHub - Share Knowledge, Grow Together</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4d61fc;
+      --secondary-color: #6c757d;
+      --accent-color: #ff7b54;
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --success-color: #28a745;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --transition: all 0.3s ease;
+    }
+
+    /* Dark mode variables */
+    .dark-mode {
+      --primary-color: #6d7dff;
+      --secondary-color: #adb5bd;
+      --light-color: #2b3035;
+      --dark-color: #f1f3f5;
+      --accent-color: #ff926b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--dark-color);
+      background-color: var(--light-color);
+      transition: var(--transition);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--light-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-icon {
+      margin-right: 0.5rem;
+      font-size: 1.8rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-item a {
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-item a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-item a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .nav-item a:hover::after {
+      width: 100%;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      font-family: var(--font-main);
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background-color: #3f50d8;
+      transform: translateY(-2px);
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(77, 97, 252, 0.3);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--secondary-color);
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary-color);
+      transform: rotate(30deg);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark-color);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 6rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(241, 245, 255, 0.9) 0%, rgba(230, 235, 255, 0.9) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(77, 97, 252, 0.1) 0%, rgba(77, 97, 252, 0.05) 60%, transparent 70%);
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -10%;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 123, 84, 0.1) 0%, rgba(255, 123, 84, 0.05) 60%, transparent 70%);
+      z-index: 0;
+    }
+
+    .hero-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--dark-color);
+    }
+
+    .hero-title span {
+      color: var(--primary-color);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-title span::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: 5px;
+      left: 0;
+      background-color: var(--accent-color);
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--secondary-color);
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btn {
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-text {
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-image img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 6rem 0;
+      background-color: white;
+      position: relative;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .features-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--dark-color);
+    }
+
+    .features-subtitle {
+      font-size: 1.1rem;
+      color: var(--secondary-color);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .feature-card.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+      z-index: -1;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card:hover::before {
+      height: 100%;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-title {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .feature-description {
+      color: var(--secondary-color);
+      font-size: 0.95rem;
+    }
+
+    /* How It Works Section */
+    .how-it-works {
+      padding: 6rem 0;
+      background-color: var(--light-color);
+    }
+
+    .how-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .how-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .how-subtitle {
+      font-size: 1.1rem;
+      color: var(--secondary-color);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 3.5rem;
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      background-color: var(--primary-color);
+      z-index: 0;
+      opacity: 0.3;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      width: 25%;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
+    }
+
+    .step.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step-number {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background-color: white;
+      color: var(--primary-color);
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      border: 2px solid var(--primary-color);
+      position: relative;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(77, 97, 252, 0.2);
+    }
+
+    .step:hover .step-number {
+      background-color: var(--primary-color);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .step-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+    }
+
+    .step-description {
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+      max-width: 200px;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, rgba(241, 245, 255, 0.9) 0%, rgba(230, 235, 255, 0.9) 100%);
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .testimonials-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .testimonials-subtitle {
+      font-size: 1.1rem;
+      color: var(--secondary-color);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .testimonials-carousel {
+      padding: 1rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-container {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .testimonial-card {
+      min-width: 100%;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      margin: 0 1rem;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-content {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      position: relative;
+      font-style: italic;
+      color: var(--dark-color);
+      flex-grow: 1;
+    }
+
+    .testimonial-content::before {
+      content: '\201C';
+      font-size: 4rem;
+      color: var(--primary-color);
+      opacity: 0.2;
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      font-family: Georgia, serif;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+
+    .author-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 1rem;
+      border: 2px solid var(--primary-color);
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+    }
+
+    .author-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .author-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .author-role {
+      color: var(--secondary-color);
+      font-size: 0.9rem;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+      opacity: 0.5;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .dot.active {
+      opacity: 1;
+      background-color: var(--primary-color);
+      transform: scale(1.2);
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 6rem 0;
+      background-color: white;
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, #3f50d8 100%);
+      color: white;
+      box-shadow: 0 20px 40px rgba(77, 97, 252, 0.3);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .cta-container.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cta-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    .cta-title {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-text {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-btn {
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .btn-light {
+      background-color: white;
+      color: var(--primary-color);
+    }
+
+    .btn-light:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-outline-light {
+      border: 2px solid white;
+      color: white;
+      background-color: transparent;
+    }
+
+    .btn-outline-light:hover {
+      background-color: white;
+      color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: white;
+    }
+
+    .footer-column p {
+      color: #adb5bd;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icons a {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-icons a:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    .footer-column ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-column ul li a {
+      color: #adb5bd;
+      transition: var(--transition);
+    }
+
+    .footer-column ul li a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+
+    .footer-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-form input {
+      padding: 0.8rem;
+      border-radius: 6px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-family: var(--font-main);
+    }
+
+    .footer-form input::placeholder {
+      color: #adb5bd;
+    }
+
+    .footer-form button {
+      padding: 0.8rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #adb5bd;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* Floating shapes animation */
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      filter: blur(40px);
+      z-index: 0;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      background-color: rgba(77, 97, 252, 0.15);
+      top: 15%;
+      right: 5%;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .shape-2 {
+      width: 250px;
+      height: 250px;
+      background-color: rgba(255, 123, 84, 0.15);
+      bottom: 10%;
+      left: 5%;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    .shape-3 {
+      width: 200px;
+      height: 200px;
+      background-color: rgba(41, 204, 151, 0.15);
+      top: 25%;
+      left: 15%;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 1rem;
+      }
+
+      .nav-menu, .nav-buttons {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .hero-container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem;
+      }
+
+      .hero-content {
+        order: 2;
+      }
+
+      .hero-image {
+        order: 1;
+        margin-bottom: 2rem;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-stats {
+        justify-content: center;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      .steps::before {
+        display: none;
+      }
+
+      .step {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-container {
+        padding: 2rem 1rem;
+      }
+
+      .cta-title {
+        font-size: 2rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background-color: white;
+      z-index: 1001;
+      padding: 2rem;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-close {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      cursor: pointer;
+      color: var(--dark-color);
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .mobile-nav-item {
+      font-size: 1.2rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .mobile-nav-item:hover {
+      color: var(--primary-color);
+      transform: translateX(5px);
+    }
+
+    .mobile-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: auto;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-book-open logo-icon"></i>
+        <span class="logo-text">StudyHub</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="resources.html">Resources</a></li>
+          <li class="nav-item"><a href="upload.html">Upload</a></li>
+          <li class="nav-item"><a href="about.html">About</a></li>
+          <li class="nav-item"><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-buttons">
+        <button class="btn btn-outline"><a href="login.html">Log In</a></button>
+        <button class="btn btn-primary">Sign Up</button>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose">
+      <i class="fas fa-times"></i>
+    </button>
+    <nav class="mobile-nav">
+      <a href="index.html" class="mobile-nav-item">Home</a>
+      <a href="resources.html" class="mobile-nav-item">Resources</a>
+      <a href="upload.html" class="mobile-nav-item">Upload</a>
+      <a href="about.html" class="mobile-nav-item">About</a>
+      <a href="contact.html" class="mobile-nav-item">Contact</a>
+    </nav>
+    <div class="mobile-buttons">
+      <button class="btn btn-outline">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+
+    <div class="container hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Share <span>Knowledge</span>, Grow <span>Together</span></h1>
+        <p class="hero-subtitle">Join thousands of students and educators who are transforming education through resource sharing. Upload, discover, and learn with StudyHub.</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary hero-btn">Get Started</button>
+          <button class="btn btn-outline hero-btn">Explore Resources</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number" id="userCounter">15K+</span>
+            <span class="stat-text">Active Users</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="resourceCounter">50K+</span>
+            <span class="stat-text">Study Resources</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="downloadCounter">200K+</span>
+            <span class="stat-text">Downloads</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="StudyHub.png" alt="StudyHub Platform">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="features-header">
+        <h2 class="features-title">Why Choose StudyHub?</h2>
+        <p class="features-subtitle">Our platform provides everything you need to enhance your learning journey and share your knowledge with others.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-search feature-icon"></i>
+          <h3 class="feature-title">Find Quality Resources</h3>
+          <p class="feature-description">Discover thousands of high-quality study materials from students and educators across all disciplines.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-upload feature-icon"></i>
+          <h3 class="feature-title">Easy Upload</h3>
+          <p class="feature-description">Share your knowledge with a simple upload process. Support for multiple file formats.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-users feature-icon"></i>
+          <h3 class="feature-title">Community Ratings</h3>
+          <p class="feature-description">Find the most helpful resources with our community rating system.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-laptop-code feature-icon"></i>
+          <h3 class="feature-title">Subject Variety</h3>
+          <p class="feature-description">Access resources across various disciplines from computer science to literature.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-shield-alt feature-icon"></i>
+          <h3 class="feature-title">Quality Control</h3>
+          <p class="feature-description">All materials are reviewed to ensure accuracy and educational value.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-graduation-cap feature-icon"></i>
+          <h3 class="feature-title">All Education Levels</h3>
+          <p class="feature-description">Materials for high school, undergraduate, postgraduate, and doctoral studies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="how-header">
+        <h2 class="how-title">How StudyHub Works</h2>
+        <p class="how-subtitle">Getting started with StudyHub is quick and easy. Follow these simple steps to begin your learning journey.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Sign Up</h3>
+          <p class="step-description">Create your free account in seconds to access all features.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Browse Resources</h3>
+          <p class="step-description">Search and filter through thousands of study materials.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Download & Use</h3>
+          <p class="step-description">Get the resources you need and enhance your learning.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Share Your Knowledge</h3>
+          <p class="step-description">Upload your own materials to help others succeed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="testimonials-header">
+        <h2 class="testimonials-title">What Our Users Say</h2>
+        <p class="testimonials-subtitle">Join thousands of satisfied students and educators who are transforming their educational experience with StudyHub.</p>
+      </div>
+      <div class="testimonials-carousel">
+        <div class="carousel-container" id="carouselContainer">
+          <div class="testimonial-card">
+            <p class="testimonial-content">StudyHub transformed my college experience. I found comprehensive notes for my engineering classes that simplified complex topics. Now I contribute my own materials to help other students.</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="author-info">
+                <p class="author-name">Alex Johnson</p>
+                <p class="author-role">Engineering Student</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">As a professor, I love how StudyHub allows me to share supplementary materials with students beyond my own classes. The platform's organization and quality control are impressive.</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="author-info">
+                <p class="author-name">Dr. Sarah Wilson</p>
+                <p class="author-role">Computer Science Professor</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">Preparing for medical school entrance exams was overwhelming until I discovered StudyHub. The quality of resources and practice materials helped me achieve my target score. Now I'm in my dream program!</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="author-info">
+                <p class="author-name">Michael Chen</p>
+                <p class="author-role">Medical Student</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots" id="carouselDots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-container">
+        <h2 class="cta-title">Ready to Transform Your Learning Experience?</h2>
+        <p class="cta-text">Join StudyHub today and get access to thousands of high-quality study resources. Share your knowledge and help others succeed.</p>
+        <div class="cta-buttons">
+          <button class="btn btn-light cta-btn">Get Started</button>
+          <button class="btn btn-outline-light cta-btn">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>StudyHub</h3>
+          <p>Share knowledge, grow together. The premier platform for students and educators to exchange study materials.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="browse.html">Resources</a></li>
+            <li><a href="upload.html">Upload</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Content Guidelines</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Subscribe</h4>
+          <p>Get the latest updates and offers.</p>
+          <form class="footer-form">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 StudyHub. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('overlay');
+
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    mobileClose.addEventListener('click', () => {
+      closeMenu();
+    });
+
+    overlay.addEventListener('click', () => {
+      closeMenu();
+    });
+
+    function closeMenu() {
+      mobileMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+    });
+
+    // Testimonial Carousel
+    const carouselContainer = document.getElementById('carouselContainer');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-index'));
+        showSlide(index);
+      });
+    });
+
+    function showSlide(index) {
+      currentIndex = index;
+      carouselContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+      
+      dots.forEach((dot, i) => {
+        if (i === currentIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    // Auto slide
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % dots.length;
+      showSlide(currentIndex);
+    }, 5000);
+
+    // Animate on scroll
+    function animateOnScroll() {
+      const featureCards = document.querySelectorAll('.feature-card');
+      const steps = document.querySelectorAll('.step');
+      const cta = document.querySelector('.cta-container');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      
+      featureCards.forEach(card => {
+        observer.observe(card);
+        // Add staggered delay for each card
+        const index = Array.from(featureCards).indexOf(card);
+        card.style.transitionDelay = `${index * 0.1}s`;
+      });
+      
+      steps.forEach(step => {
+        observer.observe(step);
+        // Add staggered delay for each step
+        const index = Array.from(steps).indexOf(step);
+        step.style.transitionDelay = `${index * 0.2}s`;
+      });
+      
+      if (cta) observer.observe(cta);
+    }
+
+    // Counter Animation
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      const speed = 200;
+      
+      counters.forEach(counter => {
+        const targetValue = counter.innerText;
+        const numericValue = parseInt(targetValue.replace(/\D/g, ''));
+        const suffix = targetValue.replace(/[0-9]/g, '');
+        let startValue = 0;
+        
+        const increment = Math.ceil(numericValue / speed);
+        
+        const updateCounter = () => {
+          startValue += increment;
+          if (startValue < numericValue) {
+            counter.innerText = `${startValue}${suffix}`;
+            setTimeout(updateCounter, 1);
+          } else {
+            counter.innerText = targetValue;
+          }
+        };
+        
+        const counterObserver = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            updateCounter();
+            counterObserver.unobserve(counter);
+          }
+        }, { threshold: 0.5 });
+        
+        counterObserver.observe(counter);
+      });
+    }
+
+    // Run animations when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      animateOnScroll();
+      animateCounters();
+    });
+  </script>
+</body>
+</html>
