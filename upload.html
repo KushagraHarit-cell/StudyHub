@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Resources - StudyHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #6c63ff;
+      --secondary-color: #4c46b6;
+      --text-color: #333;
+      --text-light: #666;
+      --background-color: #fff;
+      --card-background: #fff;
+      --border-color: #e1e1e1;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --success-color: #28a745;
+      --error-color: #dc3545;
+      --warning-color: #ffc107;
+    }
+
+    .dark-theme {
+      --primary-color: #8c7dff;
+      --secondary-color: #6c63ff;
+      --text-color: #f4f4f4;
+      --text-light: #b0b0b0;
+      --background-color: #121212;
+      --card-background: #1e1e1e;
+      --border-color: #333;
+      --shadow-color: rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      transition: background-color 0.3s ease;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--background-color);
+      box-shadow: 0 2px 10px var(--shadow-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .logo-icon {
+      margin-right: 8px;
+      font-size: 1.8rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-item {
+      margin-left: 25px;
+    }
+
+    .nav-item a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-item a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 0.9rem;
+    }
+
+    .btn a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      margin-right: 10px;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary-color);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Mobile Menu Styles */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background-color: var(--card-background);
+      box-shadow: -5px 0 15px var(--shadow-color);
+      z-index: 1000;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-close {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 30px;
+    }
+
+    .mobile-nav-item {
+      text-decoration: none;
+      color: var(--text-color);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-weight: 500;
+    }
+
+    .mobile-buttons {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-buttons .btn {
+      margin-bottom: 10px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: none;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Upload Section Styles */
+    .upload-section {
+      padding: 60px 0;
+    }
+
+    .upload-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .section-title span {
+      color: var(--primary-color);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .upload-card {
+      background-color: var(--card-background);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px var(--shadow-color);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .upload-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .file-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed var(--border-color);
+      border-radius: 5px;
+      padding: 30px;
+      cursor: pointer;
+      transition: border-color 0.3s, background-color 0.3s;
+      position: relative;
+    }
+
+    .file-upload:hover {
+      border-color: var(--primary-color);
+      background-color: rgba(108, 99, 255, 0.05);
+    }
+
+    .file-upload.active {
+      border-color: var(--primary-color);
+      background-color: rgba(108, 99, 255, 0.1);
+    }
+
+    .file-upload-icon {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .file-upload-text {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: var(--text-color);
+    }
+
+    .file-upload-hint {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .file-input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .selected-file {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 5px;
+      background-color: rgba(108, 99, 255, 0.1);
+      width: 100%;
+    }
+
+    .selected-file.active {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .file-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .file-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      color: var(--primary-color);
+    }
+
+    .file-name {
+      font-weight: 600;
+      margin-right: 10px;
+      color: var(--text-color);
+    }
+
+    .file-size {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .remove-file {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .remove-file:hover {
+      color: var(--error-color);
+    }
+
+    .upload-guidelines {
+      background-color: var(--card-background);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px var(--shadow-color);
+      padding: 30px;
+    }
+
+    .guidelines-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--text-color);
+    }
+
+    .guidelines-list {
+      list-style-type: none;
+    }
+
+    .guideline-item {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .guideline-icon {
+      color: var(--primary-color);
+      margin-right: 15px;
+      font-size: 1.2rem;
+      margin-top: 2px;
+    }
+
+    .progress-container {
+      width: 100%;
+      background-color: var(--border-color);
+      border-radius: 5px;
+      margin: 20px 0;
+      display: none;
+    }
+
+    .progress-container.active {
+      display: block;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background-color: var(--primary-color);
+      border-radius: 5px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .alert {
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .alert.active {
+      display: block;
+    }
+
+    .alert-success {
+      background-color: rgba(40, 167, 69, 0.1);
+      border-left: 4px solid var(--success-color);
+      color: var(--success-color);
+    }
+
+    .alert-error {
+      background-color: rgba(220, 53, 69, 0.1);
+      border-left: 4px solid var(--error-color);
+      color: var(--error-color);
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--card-background);
+      padding: 60px 0 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 30px;
+      padding-right: 20px;
+    }
+
+    .footer-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .footer-column p {
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .social-icons {
+      display: flex;
+    }
+
+    .social-icons a {
+      color: var(--text-light);
+      margin-right: 15px;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column ul li a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-form {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .footer-form input {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 15px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    .footer-form input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .footer-form .btn {
+      margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-light);
+    }
+
+    /* Media Queries */
+    @media (max-width: 992px) {
+      .footer-column {
+        flex: 0 0 50%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu, .nav-buttons {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+
+      .footer-column {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .upload-card, .upload-guidelines {
+        padding: 20px;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .file-upload {
+        padding: 20px;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+    /* Add these styles to your existing CSS file */
+
+/* Form validation styling */
+.form-control.valid {
+  border-color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.05);
+}
+
+.form-control.invalid {
+  border-color: #F44336;
+  background-color: rgba(244, 67, 54, 0.05);
+}
+
+/* Improved file upload area */
+.file-upload {
+  transition: all 0.3s ease;
+}
+
+.file-upload.active {
+  border-color: #2196F3;
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+/* Progress bar animations */
+.progress-container {
+  display: none;
+  height: 8px;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+.progress-container.active {
+  display: block;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #4CAF50, #2196F3);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Enhanced selected file display */
+.selected-file {
+  display: none;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.dark-theme .selected-file {
+  background-color: #333;
+  border-color: #444;
+}
+
+.selected-file.active {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-icon {
+  font-size: 24px;
+  color: #2196F3;
+}
+
+.dark-theme .file-icon {
+  color: #64B5F6;
+}
+
+.file-name {
+  font-weight: 500;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-size {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.dark-theme .file-size {
+  color: #aaa;
+}
+
+.remove-file {
+  background: none;
+  border: none;
+  color: #F44336;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.remove-file:hover {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* Enhanced alerts */
+.alert {
+  display: none;
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+}
+
+.alert.active {
+  display: block;
+}
+
+.alert-success {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #2E7D32;
+  border-left: 4px solid #4CAF50;
+}
+
+.alert-error {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: #C62828;
+  border-left: 4px solid #F44336;
+}
+
+.alert-warning {
+  background-color: rgba(255, 152, 0, 0.2);
+  color: #EF6C00;
+  border-left: 4px solid #FF9800;
+}
+
+.dark-theme .alert-success {
+  background-color: rgba(76, 175, 80, 0.15);
+  color: #81C784;
+}
+
+.dark-theme .alert-error {
+  background-color: rgba(244, 67, 54, 0.15);
+  color: #EF5350;
+}
+
+.dark-theme .alert-warning {
+  background-color: rgba(255, 152, 0, 0.15);
+  color: #FFB74D;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Disabled button styling */
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-book-open logo-icon"></i>
+        <span class="logo-text">StudyHub</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="resources.html">Resources</a></li>
+          <li class="nav-item"><a href="upload.html">Upload</a></li>
+          <li class="nav-item"><a href="about.html">About</a></li>
+          <li class="nav-item"><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-buttons">
+        <button class="btn btn-outline"><a href="login.html">Log In</a></button>
+        <button class="btn btn-primary">Sign Up</button>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose">
+      <i class="fas fa-times"></i>
+    </button>
+    <nav class="mobile-nav">
+      <a href="index.html" class="mobile-nav-item">Home</a>
+      <a href="resources.html" class="mobile-nav-item">Resources</a>
+      <a href="upload.html" class="mobile-nav-item">Upload</a>
+      <a href="about.html" class="mobile-nav-item">About</a>
+      <a href="contact.html" class="mobile-nav-item">Contact</a>
+    </nav>
+    <div class="mobile-buttons">
+      <button class="btn btn-outline">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Upload Section -->
+  <section class="upload-section">
+    <div class="container upload-container">
+      <div class="section-header fade-in">
+        <h1 class="section-title">Share Your <span>Knowledge</span></h1>
+        <p class="section-subtitle">Help others learn by uploading your study materials, notes, presentations, and more.</p>
+      </div>
+
+      <div class="upload-card fade-in">
+        <div id="alertBox" class="alert"></div>
+        
+        <form id="uploadForm" class="upload-form">
+          <div class="form-group">
+            <label for="title" class="form-label">Resource Title</label>
+            <input type="text" id="title" class="form-control" placeholder="Enter a descriptive title" required>
+          </div>
+
+          <div class="form-group">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" class="form-control" required>
+              <option value="" disabled selected>Select a category</option>
+              <option value="notes">Notes</option>
+              <option value="presentations">Presentations</option>
+              <option value="essays">Essays</option>
+              <option value="summaries">Summaries</option>
+              <option value="exercises">Exercises</option>
+              <option value="exams">Past Exams</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" id="subject" class="form-control" placeholder="e.g., Computer Science, Mathematics, History" required>
+          </div>
+
+          <div class="form-group">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" rows="4" placeholder="Provide a brief description of your resource" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Upload File</label>
+            <div id="fileUpload" class="file-upload">
+              <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+              <p class="file-upload-text">Drag and drop a file here or click to browse</p>
+              <p class="file-upload-hint">Supported formats: PDF, DOCX, PPTX, TXT, ZIP (max 50MB)</p>
+              <input type="file" id="fileInput" class="file-input" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.zip" required>
+            </div>
+
+            <div id="progressContainer" class="progress-container">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
+
+            <div id="selectedFile" class="selected-file">
+              <div class="file-info">
+                <i id="fileTypeIcon" class="file-icon"></i>
+                <span id="fileName" class="file-name"></span>
+                <span id="fileSize" class="file-size"></span>
+              </div>
+              <button type="button" id="removeFile" class="remove-file">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tags" class="form-label">Tags (comma separated)</label>
+            <input type="text" id="tags" class="form-control" placeholder="e.g., beginner, exam prep, calculus">
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn btn-primary">Upload Resource</button>
+        </form>
+      </div>
+
+      <div class="upload-guidelines fade-in">
+        <h3 class="guidelines-title">Upload Guidelines</h3>
+        <ul class="guidelines-list">
+          <li class="guideline-item">
+            <i class="fas fa-check-circle guideline-icon"></i>
+            <span>Ensure your upload is your own work or you have permission to share it.</span>
+          </li>
+          <li class="guideline-item">
+            <i class="fas fa-check-circle guideline-icon"></i>
+            <span>Provide accurate and detailed descriptions to help others find your resource.</span>
+          </li>
+          <li class="guideline-item">
+            <i class="fas fa-check-circle guideline-icon"></i>
+            <span>Maximum file size is 50MB. For larger files, consider splitting them or using compression.</span>
+          </li>
+          <li class="guideline-item">
+            <i class="fas fa-check-circle guideline-icon"></i>
+            <span>Your uploads will be reviewed for quality before being available on the platform.</span>
+          </li>
+          <li class="guideline-item">
+            <i class="fas fa-check-circle guideline-icon"></i>
+            <span>Resources should be educational in nature and contribute to the community.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>StudyHub</h3>
+          <p>Share knowledge, grow together. The premier platform for students and educators to exchange study materials.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="upload.html">Upload</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Content Guidelines</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Subscribe</h4>
+          <p>Get the latest updates and offers.</p>
+          <form class="footer-form">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 StudyHub. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme preference
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-theme');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-theme');
+      
+      if (body.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    });
+    
+    // Mobile Menu Functionality
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('overlay');
+    
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    mobileClose.addEventListener('click', closeMobileMenu);
+    overlay.addEventListener('click', closeMobileMenu);
+    
+   // File Upload Functionality
+const fileUpload = document.getElementById('fileUpload');
+const fileInput = document.getElementById('fileInput');
+const selectedFile = document.getElementById('selectedFile');
+const fileName = document.getElementById('fileName');
+const fileSize = document.getElementById('fileSize');
+const fileTypeIcon = document.getElementById('fileTypeIcon');
+const removeFile = document.getElementById('removeFile');
+const progressContainer = document.getElementById('progressContainer');
+const progressBar = document.getElementById('progressBar');
+const alertBox = document.getElementById('alertBox');
+const uploadForm = document.getElementById('uploadForm');
+
+// Drag and drop functionality
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+  fileUpload.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+['dragenter', 'dragover'].forEach(eventName => {
+  fileUpload.addEventListener(eventName, () => {
+    fileUpload.classList.add('active');
+  });
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+  fileUpload.addEventListener(eventName, () => {
+    fileUpload.classList.remove('active');
+  });
+});
+
+fileUpload.addEventListener('drop', handleDrop);
+
+function handleDrop(e) {
+  const dt = e.dataTransfer;
+  const files = dt.files;
+  
+  if (files.length) {
+    fileInput.files = files;
+    updateFileInfo();
+  }
+}
+
+// File selection via click
+fileInput.addEventListener('change', updateFileInfo);
+
+// Real-time validation
+document.getElementById('title').addEventListener('input', validateForm);
+document.getElementById('category').addEventListener('change', validateForm);
+document.getElementById('subject').addEventListener('input', validateForm);
+document.getElementById('description').addEventListener('input', validateForm);
+
+function updateFileInfo() {
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    
+    if (file.size > 50 * 1024 * 1024) { // 50MB
+      showAlert('File size exceeds the 50MB limit.', 'error');
+      fileInput.value = '';
+      return;
+    }
+    
+    // Display file information immediately
+    fileName.textContent = file.name;
+    fileSize.textContent = formatFileSize(file.size);
+    
+    // Set icon based on file type
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    let iconClass = 'fas fa-file';
+    
+    switch (fileExtension) {
+      case 'pdf':
+        iconClass = 'fas fa-file-pdf';
+        break;
+      case 'doc':
+      case 'docx':
+        iconClass = 'fas fa-file-word';
+        break;
+      case 'ppt':
+      case 'pptx':
+        iconClass = 'fas fa-file-powerpoint';
+        break;
+      case 'txt':
+        iconClass = 'fas fa-file-alt';
+        break;
+      case 'zip':
+        iconClass = 'fas fa-file-archive';
+        break;
+      default:
+        iconClass = 'fas fa-file';
+    }
+    
+    fileTypeIcon.className = iconClass + ' file-icon';
+    
+    // Show selected file area with smooth animation
+    selectedFile.classList.add('active');
+    
+    // Check file type compatibility
+    const allowedExtensions = ['pdf', 'doc', 'docx', 'ppt', 'pptx', 'txt', 'zip'];
+    if (!allowedExtensions.includes(fileExtension)) {
+      showAlert('File type not supported. Please upload PDF, DOCX, PPTX, TXT, or ZIP files.', 'warning');
+    }
+    
+    validateForm();
+  }
+}
+
+function formatFileSize(bytes) {
+  if (bytes === 0) return '0 Bytes';
+  
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+// Remove file with confirmation
+removeFile.addEventListener('click', () => {
+  if (fileInput.files.length > 0) {
+    const confirmation = confirm('Are you sure you want to remove this file?');
+    if (confirmation) {
+      fileInput.value = '';
+      selectedFile.classList.remove('active');
+      validateForm();
+    }
+  } else {
+    fileInput.value = '';
+    selectedFile.classList.remove('active');
+  }
+});
+
+// Dynamic form validation
+function validateForm() {
+  const title = document.getElementById('title').value;
+  const category = document.getElementById('category').value;
+  const subject = document.getElementById('subject').value;
+  const description = document.getElementById('description').value;
+  const submitBtn = document.getElementById('submitBtn');
+  
+  // Real-time validation feedback
+  const titleField = document.getElementById('title');
+  const subjectField = document.getElementById('subject');
+  const descriptionField = document.getElementById('description');
+  const categoryField = document.getElementById('category');
+  
+  // Clear previous validation styling
+  [titleField, subjectField, descriptionField, categoryField].forEach(field => {
+    field.classList.remove('valid', 'invalid');
+  });
+  
+  // Add validation styling based on content
+  if (title) titleField.classList.add('valid'); 
+  else if (titleField === document.activeElement) titleField.classList.add('invalid');
+  
+  if (subject) subjectField.classList.add('valid');
+  else if (subjectField === document.activeElement) subjectField.classList.add('invalid');
+  
+  if (description) descriptionField.classList.add('valid');
+  else if (descriptionField === document.activeElement && !description) descriptionField.classList.add('invalid');
+  
+  if (category) categoryField.classList.add('valid');
+  
+  // Enable/disable submit button based on validation
+  if (title && category && subject && description && fileInput.files.length > 0) {
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.disabled = true;
+  }
+  
+  return title && category && subject && description && fileInput.files.length > 0;
+}
+
+// Form submission with real-time upload
+uploadForm.addEventListener('submit', handleSubmit);
+
+function handleSubmit(e) {
+  e.preventDefault();
+  
+  // Validate form
+  if (!validateForm()) {
+    return;
+  }
+  
+  // Create FormData object for real file upload
+  const formData = new FormData();
+  formData.append('file', fileInput.files[0]);
+  formData.append('title', document.getElementById('title').value);
+  formData.append('category', document.getElementById('category').value);
+  formData.append('subject', document.getElementById('subject').value);
+  formData.append('description', document.getElementById('description').value);
+  formData.append('tags', document.getElementById('tags').value);
+  
+  // Show progress bar
+  progressContainer.classList.add('active');
+  
+  // For demo purposes, we'll use XMLHttpRequest to show real progress
+  // In a real implementation, replace this with your actual API endpoint
+  const xhr = new XMLHttpRequest();
+  const submitBtn = document.getElementById('submitBtn');
+  
+  xhr.open('POST', 'https://httpbin.org/post', true); // Demo endpoint
+  
+  xhr.upload.addEventListener('progress', (event) => {
+    if (event.lengthComputable) {
+      const percentComplete = Math.round((event.loaded / event.total) * 100);
+      progressBar.style.width = percentComplete + '%';
+      submitBtn.textContent = `Uploading... ${percentComplete}%`;
+    }
+  });
+  
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      // Save resource info to localStorage (simulating a backend)
+      saveResource();
+      
+      showAlert('Your file has been successfully uploaded and will appear in the resources page.', 'success');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Upload Resource';
+      
+      // Reset form after a delay
+      setTimeout(() => {
+        uploadForm.reset();
+        selectedFile.classList.remove('active');
+        progressContainer.classList.remove('active');
+        progressBar.style.width = '0%';
+        
+        // Redirect to resources page after successful upload
+        window.location.href = 'resources.html';
+      }, 2000);
+    } else {
+      showAlert('Upload failed. Please try again.', 'error');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Upload Resource';
+      progressContainer.classList.remove('active');
+    }
+  };
+  
+  xhr.onerror = function() {
+    showAlert('Network error occurred. Please check your connection and try again.', 'error');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Upload Resource';
+    progressContainer.classList.remove('active');
+  };
+  
+  xhr.onabort = function() {
+    showAlert('Upload aborted.', 'warning');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Upload Resource';
+    progressContainer.classList.remove('active');
+  };
+  
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Uploading...';
+  
+  // Send the actual form data
+  xhr.send(formData);
+}
+
+function showAlert(message, type) {
+  alertBox.textContent = message;
+  alertBox.className = 'alert active alert-' + type;
+  
+  // Auto close alert after 5 seconds
+  setTimeout(() => {
+    alertBox.classList.remove('active');
+  }, 5000);
+}
+
+function saveResource() {
+  // Get form data
+  const title = document.getElementById('title').value;
+  const category = document.getElementById('category').value;
+  const subject = document.getElementById('subject').value;
+  const description = document.getElementById('description').value;
+  const tags = document.getElementById('tags').value;
+  const file = fileInput.files[0];
+  
+  // Create resource object
+  const resource = {
+    id: Date.now().toString(),
+    title: title,
+    category: category,
+    subject: subject,
+    description: description,
+    fileName: file.name,
+    fileSize: formatFileSize(file.size),
+    fileType: file.type,
+    tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag !== ''),
+    uploadDate: new Date().toISOString(),
+    downloads: 0,
+    rating: 0,
+    reviews: 0
+  };
+  
+  // Get existing resources from localStorage or initialize empty array
+  let resources = JSON.parse(localStorage.getItem('studyHubResources')) || [];
+  
+  // Add new resource
+  resources.push(resource);
+  
+  // Save back to localStorage
+  localStorage.setItem('studyHubResources', JSON.stringify(resources));
+}
+  </script>
+</body>
+</html>

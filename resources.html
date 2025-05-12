@@ -3,701 +3,684 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browse Resources - StudyHub</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Study Resources - StudyHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* Global Styles */
-:root {
-  --primary-color: #4a6fdc;
-  --primary-dark: #3a5eba;
-  --secondary-color: #53bd95;
-  --text-color: #333;
-  --text-light: #767676;
-  --bg-color: #ffffff;
-  --bg-light: #f8f9fa;
-  --border-color: #e0e0e0;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  --radius: 8px;
-  --transition: all 0.3s ease;
-}
+    :root {
+      --primary-color: #6c63ff;
+      --secondary-color: #4c46b6;
+      --text-color: #333;
+      --text-light: #666;
+      --background-color: #fff;
+      --card-background: #fff;
+      --border-color: #e1e1e1;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --success-color: #28a745;
+      --error-color: #dc3545;
+      --warning-color: #ffc107;
+    }
 
-/* Dark Theme Variables */
-.dark-theme {
-  --primary-color: #5a7fec;
-  --primary-dark: #4a6fdc;
-  --text-color: #f0f0f0;
-  --text-light: #c0c0c0;
-  --bg-color: #1a1a1a;
-  --bg-light: #2a2a2a;
-  --border-color: #444;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
+    .dark-theme {
+      --primary-color: #8c7dff;
+      --secondary-color: #6c63ff;
+      --text-color: #f4f4f4;
+      --text-light: #b0b0b0;
+      --background-color: #121212;
+      --card-background: #1e1e1e;
+      --border-color: #333;
+      --shadow-color: rgba(0, 0, 0, 0.4);
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  font-family: 'Inter', sans-serif;
-  color: var(--text-color);
-  background-color: var(--bg-color);
-  line-height: 1.6;
-  transition: var(--transition);
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      transition: background-color 0.3s ease;
+    }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-a {
-  text-decoration: none;
-  color: var(--primary-color);
-  transition: var(--transition);
-}
+    /* Header Styles */
+    header {
+      background-color: var(--background-color);
+      box-shadow: 0 2px 10px var(--shadow-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-a:hover {
-  color: var(--primary-dark);
-}
-
-ul {
-  list-style: none;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
-  border-radius: var(--radius);
-  border: none;
-  font-weight: 500;
-  cursor: pointer;
-  transition: var(--transition);
-  font-size: 0.9rem;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-dark);
-}
-
-.btn-outline {
-  background-color: transparent;
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
-}
-
-.btn-outline:hover {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-/* Header Styles */
-header {
-  padding: 15px 0;
-  background-color: var(--bg-color);
-  box-shadow: var(--shadow);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: var(--primary-color);
-}
-
-.logo-icon {
-  margin-right: 8px;
-  font-size: 1.2em;
-}
-
-.nav-menu {
+    .header-container {
       display: flex;
-      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
 
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .logo-icon {
+      margin-right: 8px;
+      font-size: 1.8rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-item {
+      margin-left: 25px;
     }
 
     .nav-item a {
-      display: flex;
-      font-weight: 600;
-      color: #212529;
-      position: relative;
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
 
     .nav-item a:hover {
       color: var(--primary-color);
-      text-decoration: none;
-    }
-
-    .nav-item a::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: var(--primary-color);
-      transition: var(--transition);
-    }
-
-    .nav-item a:hover::after {
-      width: 100%;
-      
     }
 
     .nav-buttons {
       display: flex;
-      gap: 0.8rem;
       align-items: center;
     }
 
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: var(--text-color);
-}
-
-.mobile-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--text-color);
-}
-
-/* Browse Section Styles */
-.browse-section {
-  padding: 40px 0;
-  background-color: var(--bg-light);
-}
-
-.browse-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.browse-header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-  color: var(--text-color);
-}
-
-.browse-header p {
-  color: var(--text-light);
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.browse-container {
-  display: flex;
-  gap: 30px;
-}
-
-/* Filter Sidebar Styles */
-.filters {
-  width: 280px;
-  background-color: var(--bg-color);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 20px;
-  height: fit-content;
-  position: sticky;
-  top: 90px;
-}
-
-.filter-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.filter-header h3 {
-  font-size: 1.2rem;
-}
-
-.clear-filters {
-  background: none;
-  border: none;
-  color: var(--primary-color);
-  cursor: pointer;
-  font-size: 0.85rem;
-}
-
-.filter-close {
-  display: none;
-  cursor: pointer;
-  color: var(--text-light);
-}
-
-.filter-group {
-  margin-bottom: 25px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 20px;
-}
-
-.filter-group:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.filter-group h4 {
-  margin-bottom: 12px;
-  font-size: 1rem;
-  color: var(--text-color);
-}
-
-.filter-search {
-  position: relative;
-  margin-bottom: 15px;
-}
-
-.filter-search input {
-  width: 100%;
-  padding: 8px 12px;
-  padding-right: 35px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  font-size: 0.9rem;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-.filter-search i {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-light);
-}
-
-.filter-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.filter-option {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-}
-
-.filter-option input {
-  margin-right: 8px;
-}
-
-.filter-option span.count {
-  color: var(--text-light);
-  font-size: 0.85rem;
-}
-
-.stars {
-  display: flex;
-  gap: 2px;
-  color: #ffc107;
-}
-
-.apply-filters {
-  width: 100%;
-  margin-top: 20px;
-}
-
-/* Results Container */
-.results-container {
-  flex: 1;
-}
-
-.results-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.results-count {
-  font-size: 0.95rem;
-  color: var(--text-light);
-}
-
-.results-actions {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-.filter-button {
-  display: none;
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  color: var(--text-color);
-}
-
-.sort-dropdown {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sort-dropdown label {
-  font-size: 0.9rem;
-  color: var(--text-light);
-}
-
-.sort-dropdown select {
-  padding: 8px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-/* Results Grid */
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-/* Resource Card (since we'll need to style these for the results) */
-.resource-card {
-  background-color: var(--bg-color);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  transition: var(--transition);
-}
-
-.resource-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.resource-header {
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.resource-type {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.resource-format {
-  background-color: var(--bg-light);
-  color: var(--text-light);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.resource-content {
-  padding: 15px;
-}
-
-.resource-title {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: var(--text-color);
-}
-
-.resource-meta {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 12px;
-  color: var(--text-light);
-  font-size: 0.85rem;
-}
-
-.resource-subject {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.resource-level {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.resource-description {
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-  color: var(--text-color);
-}
-
-.resource-stats {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 15px;
-  border-top: 1px solid var(--border-color);
-  font-size: 0.85rem;
-}
-
-.resource-rating {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #ffc107;
-}
-
-.resource-downloads {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--text-light);
-}
-
-/* Pagination */
-.pagination {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  margin-top: 40px;
-}
-
-.page-btn {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.page-btn:hover {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
-
-.page-btn.active {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
-
-.page-btn.prev, .page-btn.next {
-  font-size: 0.8rem;
-}
-
-.page-ellipsis {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  color: var(--text-light);
-}
-
-/* Footer Styles */
-footer {
-  background-color: #1a1a2e;
-  color: #f0f0f0;
-  padding: 60px 0 20px;
-}
-
-.footer-content {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-}
-
-.footer-column h3 {
-  color: white;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-}
-
-.footer-column h4 {
-  color: white;
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-}
-
-.footer-column p {
-  margin-bottom: 20px;
-  color: #c0c0c0;
-  font-size: 0.9rem;
-}
-
-.social-icons {
-  display: flex;
-  gap: 15px;
-}
-
-.social-icons a {
-  color: #c0c0c0;
-  font-size: 1.2rem;
-  transition: var(--transition);
-}
-
-.social-icons a:hover {
-  color: var(--primary-color);
-}
-
-.footer-column ul {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-column ul li a {
-  color: #c0c0c0;
-  font-size: 0.9rem;
-  transition: var(--transition);
-}
-
-.footer-column ul li a:hover {
-  color: var(--primary-color);
-}
-
-.footer-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-form input {
-  padding: 12px;
-  border-radius: var(--radius);
-  border: 1px solid #444;
-  background-color: #2a2a2a;
-  color: white;
-}
-
-.footer-form .btn {
-  width: 100%;
-}
-
-.footer-bottom {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid #444;
-  text-align: center;
-  color: #c0c0c0;
-  font-size: 0.85rem;
-}
-
-/* Responsive Styles */
-@media (max-width: 992px) {
-  .footer-content {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-menu, .nav-buttons {
-    display: none;
-  }
-  
-  .mobile-toggle {
-    display: block;
-  }
-  
-  .browse-container {
-    flex-direction: column;
-  }
-  
-  .filters {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 1000;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-  
-  .filters.active {
-    transform: translateX(0);
-  }
-  
-  .filter-close {
-    display: block;
-  }
-  
-  .filter-button {
-    display: flex;
-  }
-  
-  .results-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-}
-
-@media (max-width: 576px) {
-  .footer-content {
-    grid-template-columns: 1fr;
-  }
-  
-  .results-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-  
-  .results-actions {
-    width: 100%;
-    justify-content: space-between;
-  }
-  
-  .results-grid {
-    grid-template-columns: 1fr;
-  }
-}
+    .btn {
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 0.9rem;
+    }
+
+    .btn a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      margin-right: 10px;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary-color);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Mobile Menu Styles */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background-color: var(--card-background);
+      box-shadow: -5px 0 15px var(--shadow-color);
+      z-index: 1000;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-close {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 30px;
+    }
+
+    .mobile-nav-item {
+      text-decoration: none;
+      color: var(--text-color);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-weight: 500;
+    }
+
+    .mobile-buttons {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-buttons .btn {
+      margin-bottom: 10px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: none;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Resources Section */
+    .resources-section {
+      padding: 60px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .section-title span {
+      color: var(--primary-color);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Search and Filter */
+    .resources-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+      align-items: center;
+    }
+
+    .search-container {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 15px 12px 45px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      font-size: 1.2rem;
+    }
+
+    .filter-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-select {
+      padding: 12px 15px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-size: 0.9rem;
+      min-width: 150px;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .upload-btn {
+      padding: 12px 20px;
+      white-space: nowrap;
+    }
+
+    /* Resources Grid */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .resource-card {
+      background-color: var(--card-background);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px var(--shadow-color);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px var(--shadow-color);
+    }
+
+    .resource-header {
+      padding: 20px;
+      position: relative;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .resource-category {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+
+    .resource-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .resource-title {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+
+    .resource-subject {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .resource-body {
+      padding: 20px;
+    }
+
+    .resource-description {
+      color: var(--text-color);
+      margin-bottom: 15px;
+      display: -webkit-box;
+      overflow: hidden;
+    }
+
+    .resource-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .meta-icon {
+      margin-right: 5px;
+    }
+
+    .resource-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 15px;
+    }
+
+    .tag {
+      background-color: rgba(108, 99, 255, 0.1);
+      color: var(--primary-color);
+      font-size: 0.8rem;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+
+    .resource-footer {
+      padding: 15px 20px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      color: var(--text-light);
+    }
+
+    .stars {
+      color: var(--warning-color);
+      margin-right: 5px;
+    }
+
+    .download-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .download-btn:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* No Results */
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      background-color: var(--card-background);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px var(--shadow-color);
+    }
+
+    .no-results-icon {
+      font-size: 3rem;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .no-results-text {
+      font-size: 1.2rem;
+      color: var(--text-color);
+      margin-bottom: 20px;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .page-btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .page-btn.active {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--card-background);
+      padding: 60px 0 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 30px;
+      padding-right: 20px;
+    }
+
+    .footer-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .footer-column p {
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .social-icons {
+      display: flex;
+    }
+
+    .social-icons a {
+      color: var(--text-light);
+      margin-right: 15px;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column ul li a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-form {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .footer-form input {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 15px;
+      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    .footer-form input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .footer-form .btn {
+      margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-light);
+    }
+
+    /* Media Queries */
+    @media (max-width: 992px) {
+      .footer-column {
+        flex: 0 0 50%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu, .nav-buttons {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .resources-tools {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-container, .filter-container {
+        width: 100%;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+
+      .footer-column {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
   </style>
 </head>
 <body>
-    
-
-  <!-- Header -->
   <header>
     <div class="container header-container">
       <a href="index.html" class="logo">
@@ -708,7 +691,7 @@ footer {
       <nav>
         <ul class="nav-menu">
           <li class="nav-item"><a href="index.html">Home</a></li>
-          <li class="nav-item"><a href="browse.html">Resources</a></li>
+          <li class="nav-item"><a href="resources.html">Resources</a></li>
           <li class="nav-item"><a href="upload.html">Upload</a></li>
           <li class="nav-item"><a href="about.html">About</a></li>
           <li class="nav-item"><a href="contact.html">Contact</a></li>
@@ -716,7 +699,7 @@ footer {
       </nav>
 
       <div class="nav-buttons">
-        <button class="btn btn-outline">Log In</button>
+        <button class="btn btn-outline"><a href="login.html">Log In</a></button>
         <button class="btn btn-primary">Sign Up</button>
         <button class="theme-toggle" id="themeToggle">
           <i class="fas fa-moon"></i>
@@ -729,793 +712,609 @@ footer {
     </div>
   </header>
 
-  <!-- Browse Section -->
-  <section class="browse-section">
-    <div class="container">
-      <div class="browse-header">
-        <h1>Browse Study Resources</h1>
-        <p>Discover thousands of high-quality study materials uploaded by students and educators from around the world.</p>
-      </div>
-      
-      <div class="browse-container">
-        <!-- Filters Sidebar -->
-        <div class="filters" id="filters">
-          <div class="filter-header">
-            <h3>Filters</h3>
-            <div>
-              <button class="clear-filters">Clear All</button>
-              <i class="fas fa-times filter-close" id="filterClose"></i>
-            </div>
-          </div>
-          
-          <div class="filter-group">
-            <h4>Resource Type</h4>
-            <div class="filter-options">
-              <label class="filter-option">
-                <input type="checkbox" name="type" value="notes" checked>
-                <span>Study Notes</span>
-                <span class="count">1.2K</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="type" value="projects">
-                <span>Projects</span>
-                <span class="count">856</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="type" value="papers">
-                <span>Question Papers</span>
-                <span class="count">1.5K</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="type" value="assignments">
-                <span>Assignments</span>
-                <span class="count">724</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="type" value="presentations">
-                <span>Presentations</span>
-                <span class="count">492</span>
-              </label>
-            </div>
-          </div>
-          
-          <div class="filter-group">
-            <h4>Subject</h4>
-            <div class="filter-search">
-              <input type="text" placeholder="Search subjects...">
-              <i class="fas fa-search"></i>
-            </div>
-            <div class="filter-options">
-              <label class="filter-option">
-                <input type="checkbox" name="subject" value="computer-science">
-                <span>Computer Science</span>
-                <span class="count">962</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="subject" value="mathematics">
-                <span>Mathematics</span>
-                <span class="count">847</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="subject" value="physics">
-                <span>Physics</span>
-                <span class="count">635</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="subject" value="business">
-                <span>Business</span>
-                <span class="count">582</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="subject" value="medicine">
-                <span>Medicine</span>
-                <span class="count">471</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="subject" value="engineering">
-                <span>Engineering</span>
-                <span class="count">783</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="subject" value="literature">
-                <span>Literature</span>
-                <span class="count">529</span>
-              </label>
-            </div>
-          </div>
-          
-          <div class="filter-group">
-            <h4>Education Level</h4>
-            <div class="filter-options">
-              <label class="filter-option">
-                <input type="checkbox" name="level" value="high-school">
-                <span>High School</span>
-                <span class="count">1.1K</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="level" value="undergraduate">
-                <span>Undergraduate</span>
-                <span class="count">2.3K</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="level" value="postgraduate">
-                <span>Postgraduate</span>
-                <span class="count">976</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="level" value="doctoral">
-                <span>Doctoral</span>
-                <span class="count">348</span>
-              </label>
-            </div>
-          </div>
-          
-          <div class="filter-group">
-            <h4>File Format</h4>
-            <div class="filter-options">
-              <label class="filter-option">
-                <input type="checkbox" name="format" value="pdf">
-                <span>PDF</span>
-                <span class="count">3.2K</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="format" value="docx">
-                <span>DOCX</span>
-                <span class="count">1.4K</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="format" value="ppt">
-                <span>PPT</span>
-                <span class="count">864</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="format" value="xlsx">
-                <span>XLSX</span>
-                <span class="count">472</span>
-              </label>
-              <label class="filter-option">
-                <input type="checkbox" name="format" value="other">
-                <span>Other<label class="filter-option">
-                    <input type="checkbox" name="format" value="other">
-                    <span>Other</span>
-                    <span class="count">321</span>
-                  </label>
-                </div>
-              </div>
-              
-              <div class="filter-group">
-                <h4>Rating</h4>
-                <div class="filter-options rating-filter">
-                  <label class="filter-option">
-                    <input type="checkbox" name="rating" value="5">
-                    <div class="stars">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                    </div>
-                    <span class="count">743</span>
-                  </label>
-                  <label class="filter-option">
-                    <input type="checkbox" name="rating" value="4">
-                    <div class="stars">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <span class="count">1.2K</span>
-                  </label>
-                  <label class="filter-option">
-                    <input type="checkbox" name="rating" value="3">
-                    <div class="stars">
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i>
-                      <i class="far fa-star"></i>
-                      <i class="far fa-star"></i>
-                    </div>
-                    <span class="count">867</span>
-                  </label>
-                </div>
-              </div>
-              
-              <button class="btn btn-primary apply-filters">Apply Filters</button>
-            </div>
-            
-            <!-- Results Container -->
-            <div class="results-container">
-              <div class="results-header">
-                <div class="results-count">
-                  <p><strong>5,283</strong> resources found</p>
-                </div>
-                <div class="results-actions">
-                  <button class="filter-button" id="showFilters">
-                    <i class="fas fa-filter"></i> Filters
-                  </button>
-                  <div class="sort-dropdown">
-                    <label for="sort">Sort by:</label>
-                    <select id="sort" name="sort">
-                      <option value="relevance">Most Relevant</option>
-                      <option value="newest">Newest</option>
-                      <option value="popular">Most Downloaded</option>
-                      <option value="rating">Highest Rated</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="results-grid">
-                <!-- Resource cards will be dynamically inserted here -->
-              </div>
-              
-              <div class="pagination">
-                <button class="page-btn prev"><i class="fas fa-chevron-left"></i></button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <span class="page-ellipsis">...</span>
-                <button class="page-btn">42</button>
-                <button class="page-btn next"><i class="fas fa-chevron-right"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <footer>
-        <div class="container">
-          <div class="footer-content">
-            <div class="footer-column">
-              <h3>StudyHub</h3>
-              <p>Share knowledge, grow together. The premier platform for students and educators to exchange study materials.</p>
-              <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="footer-column">
-              <h4>Quick Links</h4>
-              <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="browse.html">Resources</a></li>
-                <li><a href="upload.html">Upload</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-            </div>
-            <div class="footer-column">
-              <h4>Support</h4>
-              <ul>
-                <li><a href="#">Help Center</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Content Guidelines</a></li>
-              </ul>
-            </div>
-            <div class="footer-column">
-              <h4>Subscribe</h4>
-              <p>Get the latest updates and offers.</p>
-              <form class="footer-form">
-                <input type="email" placeholder="Your email address" required>
-                <button type="submit" class="btn btn-primary">Subscribe</button>
-              </form>
-            </div>
-          </div>
-          <div class="footer-bottom">
-            <p>&copy; 2025 StudyHub. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-  // Theme Toggle Functionality
-  initThemeToggle();
-  
-  // Mobile Menu Toggle
-  initMobileMenu();
-  
-  // Filter Sidebar Toggle (for mobile)
-  initFilterSidebar();
-  
-  // Add scroll animations
-  initScrollAnimations();
-  
-  // Initialize resource cards
-  loadResourceCards();
-});
-
-// Theme Toggle Functionality
-function initThemeToggle() {
-  const themeToggle = document.getElementById('themeToggle');
-  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-  const currentTheme = localStorage.getItem('theme');
-  
-  // Set initial theme based on saved preference or system preference
-  if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-    document.body.classList.add('dark-theme');
-    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-  } else {
-    document.body.classList.remove('dark-theme');
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-  }
-  
-  // Toggle theme when button is clicked
-  themeToggle.addEventListener('click', function() {
-    document.body.classList.toggle('dark-theme');
-    
-    // Update button icon
-    if (document.body.classList.contains('dark-theme')) {
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-      localStorage.setItem('theme', 'dark');
-    } else {
-      themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-      localStorage.setItem('theme', 'light');
-    }
-    
-    // Add transition effect
-    document.body.classList.add('theme-transition');
-    setTimeout(() => {
-      document.body.classList.remove('theme-transition');
-    }, 1000);
-  });
-}
-
-// Mobile Menu Toggle
-function initMobileMenu() {
-  const mobileToggle = document.getElementById('mobileToggle');
-  const navMenu = document.querySelector('.nav-menu');
-  
-  if (mobileToggle) {
-    mobileToggle.addEventListener('click', function() {
-      navMenu.classList.toggle('active');
-      
-      // Change icon based on menu state
-      if (navMenu.classList.contains('active')) {
-        mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
-      } else {
-        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-      }
-    });
-  }
-  
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', function(event) {
-    if (navMenu && navMenu.classList.contains('active') && 
-        !event.target.closest('.nav-menu') && 
-        !event.target.closest('#mobileToggle')) {
-      navMenu.classList.remove('active');
-      mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-    }
-  });
-}
-
-// Filter Sidebar Toggle (for mobile)
-function initFilterSidebar() {
-  const showFiltersBtn = document.getElementById('showFilters');
-  const filters = document.getElementById('filters');
-  const filterClose = document.getElementById('filterClose');
-  
-  if (showFiltersBtn && filters) {
-    showFiltersBtn.addEventListener('click', function() {
-      filters.classList.add('active');
-    });
-  }
-  
-  if (filterClose && filters) {
-    filterClose.addEventListener('click', function() {
-      filters.classList.remove('active');
-    });
-  }
-  
-  // Filter functionality
-  const applyFiltersBtn = document.querySelector('.apply-filters');
-  const clearFiltersBtn = document.querySelector('.clear-filters');
-  
-  if (applyFiltersBtn) {
-    applyFiltersBtn.addEventListener('click', function() {
-      // Get all checked filters
-      const checkedFilters = document.querySelectorAll('.filter-option input:checked');
-      console.log('Applying filters:', Array.from(checkedFilters).map(f => f.value));
-      
-      // In a real app, you would fetch filtered results here
-      // For now, we'll just close the filter sidebar on mobile
-      if (window.innerWidth < 768 && filters) {
-        filters.classList.remove('active');
-      }
-      
-      // Simulate loading of new results
-      simulateLoading();
-    });
-  }
-  
-  if (clearFiltersBtn) {
-    clearFiltersBtn.addEventListener('click', function() {
-      // Clear all checkboxes
-      document.querySelectorAll('.filter-option input[type="checkbox"]').forEach(checkbox => {
-        checkbox.checked = false;
-      });
-      
-      // Clear text inputs
-      document.querySelectorAll('.filter-search input').forEach(input => {
-        input.value = '';
-      });
-    });
-  }
-}
-
-// Simulate loading of resource cards
-function simulateLoading() {
-  const resultsGrid = document.querySelector('.results-grid');
-  
-  if (resultsGrid) {
-    resultsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i></div>';
-    
-    setTimeout(() => {
-      loadResourceCards();
-    }, 800);
-  }
-}
-
-// Load resource cards
-function loadResourceCards() {
-  const resultsGrid = document.querySelector('.results-grid');
-  
-  if (!resultsGrid) return;
-  
-  resultsGrid.innerHTML = '';
-  
-  // Sample data for resource cards
-  const sampleResources = [
-    {
-      title: "Introduction to Data Structures and Algorithms",
-      author: "Dr. Sarah Johnson",
-      type: "Study Notes",
-      subject: "Computer Science",
-      level: "Undergraduate",
-      format: "PDF",
-      downloads: 2584,
-      rating: 4.8,
-      date: "2 days ago",
-      premium: false,
-      image: "computer-science"
-    },
-    {
-      title: "Advanced Calculus Complete Course Notes",
-      author: "Prof. Michael Chen",
-      type: "Study Notes",
-      subject: "Mathematics",
-      level: "Undergraduate",
-      format: "PDF",
-      downloads: 1892,
-      rating: 4.7,
-      date: "1 week ago",
-      premium: true,
-      image: "mathematics"
-    },
-    {
-      title: "Quantum Physics Simplified",
-      author: "Dr. Robert Miller",
-      type: "Study Notes",
-      subject: "Physics",
-      level: "Undergraduate",
-      format: "PDF",
-      downloads: 1435,
-      rating: 4.5,
-      date: "2 weeks ago",
-      premium: false,
-      image: "physics"
-    },
-    {
-      title: "Financial Management Case Studies",
-      author: "Prof. Emily Williams",
-      type: "Projects",
-      subject: "Business",
-      level: "Postgraduate",
-      format: "DOCX",
-      downloads: 976,
-      rating: 4.3,
-      date: "3 weeks ago",
-      premium: false,
-      image: "business"
-    },
-    {
-      title: "Human Anatomy Detailed Diagrams",
-      author: "Dr. James Anderson",
-      type: "Study Notes",
-      subject: "Medicine",
-      level: "Undergraduate",
-      format: "PDF",
-      downloads: 1243,
-      rating: 4.9,
-      date: "1 month ago",
-      premium: true,
-      image: "medicine"
-    },
-    {
-      title: "Structural Engineering Principles",
-      author: "Prof. David Wilson",
-      type: "Study Notes",
-      subject: "Engineering",
-      level: "Undergraduate",
-      format: "PDF",
-      downloads: 892,
-      rating: 4.6,
-      date: "1 month ago",
-      premium: false,
-      image: "engineering"
-    },
-    {
-      title: "Shakespeare's Plays Analysis",
-      author: "Dr. Laura Thompson",
-      type: "Study Notes",
-      subject: "Literature",
-      level: "Undergraduate",
-      format: "DOCX",
-      downloads: 753,
-      rating: 4.4,
-      date: "2 months ago",
-      premium: false,
-      image: "literature"
-    },
-    {
-      title: "Machine Learning Projects with Python",
-      author: "Prof. Alex Turner",
-      type: "Projects",
-      subject: "Computer Science",
-      level: "Postgraduate",
-      format: "PDF",
-      downloads: 1879,
-      rating: 4.9,
-      date: "2 months ago",
-      premium: true,
-      image: "computer-science"
-    }
-  ];
-  
-  // Create and append resource cards
-  sampleResources.forEach(resource => {
-    const card = createResourceCard(resource);
-    resultsGrid.appendChild(card);
-  });
-  
-  // Add scroll animation classes to cards
-  const cards = document.querySelectorAll('.resource-card');
-  cards.forEach((card, index) => {
-    card.classList.add('scroll-reveal');
-    card.style.animationDelay = `${index * 0.1}s`;
-  });
-}
-
-// Create resource card element
-function createResourceCard(resource) {
-  const card = document.createElement('div');
-  card.className = 'resource-card';
-  
-  // Generate star rating HTML
-  let starsHTML = '';
-  for (let i = 1; i <= 5; i++) {
-    if (i <= Math.floor(resource.rating)) {
-      starsHTML += '<i class="fas fa-star"></i>';
-    } else if (i - 0.5 <= resource.rating) {
-      starsHTML += '<i class="fas fa-star-half-alt"></i>';
-    } else {
-      starsHTML += '<i class="far fa-star"></i>';
-    }
-  }
-  
-  card.innerHTML = `
-    <div class="resource-image ${resource.image}">
-      ${resource.premium ? '<div class="premium-badge">Premium</div>' : ''}
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose">
+      <i class="fas fa-times"></i>
+    </button>
+    <nav class="mobile-nav">
+      <a href="index.html" class="mobile-nav-item">Home</a>
+      <a href="resources.html" class="mobile-nav-item">Resources</a>
+      <a href="upload.html" class="mobile-nav-item">Upload</a>
+      <a href="about.html" class="mobile-nav-item">About</a>
+      <a href="contact.html" class="mobile-nav-item">Contact</a>
+    </nav>
+    <div class="mobile-buttons">
+      <button class="btn btn-outline">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
     </div>
-    <div class="resource-content">
-      <h3>${resource.title}</h3>
-      <p class="resource-author">By ${resource.author}</p>
-      <div class="resource-meta">
-        <span class="resource-type">${resource.type}</span>
-        <span class="resource-subject">${resource.subject}</span>
-        <span class="resource-level">${resource.level}</span>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Resources Section -->
+  <section class="resources-section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h1 class="section-title">Discover <span>Study Resources</span></h1>
+        <p class="section-subtitle">Browse our collection of high-quality study materials shared by students and educators.</p>
       </div>
-      <div class="resource-format">
-        <i class="far fa-file-${resource.format.toLowerCase()}"></i> ${resource.format}
-      </div>
-      <div class="resource-stats">
-        <div class="resource-downloads">
-          <i class="fas fa-download"></i> ${resource.downloads}
+
+      <div class="resources-tools fade-in">
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search resources...">
         </div>
-        <div class="resource-rating">
-          ${starsHTML}
-          <span>(${resource.rating})</span>
+
+        <div class="filter-container">
+          <select id="categoryFilter" class="filter-select">
+            <option value="">All Categories</option>
+            <option value="notes">Notes</option>
+            <option value="presentations">Presentations</option>
+            <option value="essays">Essays</option>
+            <option value="summaries">Summaries</option>
+            <option value="exercises">Exercises</option>
+            <option value="exams">Past Exams</option>
+            <option value="other">Other</option>
+          </select>
+
+          <select id="subjectFilter" class="filter-select">
+            <option value="">All Subjects</option>
+            <!-- Subjects will be populated dynamically -->
+          </select>
+
+          <select id="sortBy" class="filter-select">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="downloads">Most Downloads</option>
+            <option value="rating">Highest Rating</option>
+          </select>
+        </div>
+
+        <a href="upload.html" class="btn btn-primary upload-btn">
+          <i class="fas fa-upload"></i> Upload Resource
+        </a>
+      </div>
+
+      <div id="resourcesContainer" class="resources-grid fade-in">
+        <!-- Resources will be populated dynamically -->
+      </div>
+
+      <div id="noResults" class="no-results fade-in" style="display: none;">
+        <i class="fas fa-search no-results-icon"></i>
+        <h3 class="no-results-text">No resources found matching your criteria</h3>
+        <p>Try adjusting your search or filters, or <a href="upload.html">upload your own resource</a>.</p>
+      </div>
+
+      <div class="pagination fade-in" id="pagination">
+        <!-- Pagination will be populated dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>StudyHub</h3>
+          <p>Share knowledge, grow together. The premier platform for students and educators to exchange study materials.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="upload.html">Upload</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Content Guidelines</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Subscribe</h4>
+          <p>Get the latest updates and offers.</p>
+          <form class="footer-form">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
         </div>
       </div>
-      <div class="resource-date">Added ${resource.date}</div>
-      <div class="resource-actions">
-        <button class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
-        <button class="btn btn-outline btn-sm"><i class="far fa-bookmark"></i> Save</button>
+      <div class="footer-bottom">
+        <p>&copy; 2025 StudyHub. All rights reserved.</p>
       </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme preference
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-theme');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-theme');
+      
+      if (body.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } 
+       else {
+        localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    });
+    
+    // Mobile Menu Functionality
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    const overlay = document.getElementById('overlay');
+    
+    mobileToggle.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    const closeMenu = () => {
+      mobileMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    
+    mobileClose.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    
+ // Resources Data - Initialize from localStorage or use default data
+let resources = JSON.parse(localStorage.getItem('studyHubResources')) || [
+  {
+    id: 1,
+    title: "Advanced Calculus Notes",
+    subject: "Mathematics",
+    category: "notes",
+    description: "Comprehensive notes covering limits, derivatives, integrals, and series with examples and practice problems.",
+    author: "Prof. Johnson",
+    date: "2025-03-15",
+    downloads: 1254,
+    rating: 4.8,
+    tags: ["calculus", "math", "advanced"],
+    file: null // This would typically store file reference
+  },
+  // ... Keep all your existing resources here ...
+  {
+    id: 9,
+    title: "Marketing Strategy Framework",
+    subject: "Business",
+    category: "presentations",
+    description: "Comprehensive framework for developing effective marketing strategies with case studies.",
+    author: "James Wilson",
+    date: "2025-03-30",
+    downloads: 921,
+    rating: 4.7,
+    tags: ["marketing", "business", "strategy"],
+    file: null
+  }
+];
+
+// Event handler for file upload form submission - to be called from upload.html
+function handleResourceUpload(event) {
+  event.preventDefault();
+  
+  // Get form data
+  const form = event.target;
+  const title = form.querySelector('#resourceTitle').value;
+  const subject = form.querySelector('#resourceSubject').value;
+  const category = form.querySelector('#resourceCategory').value;
+  const description = form.querySelector('#resourceDescription').value;
+  const author = form.querySelector('#authorName').value;
+  const tagsInput = form.querySelector('#resourceTags').value;
+  const fileInput = form.querySelector('#resourceFile');
+  
+  // Process tags
+  const tags = tagsInput.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag);
+  
+  // Create new resource object
+  const newResource = {
+    id: resources.length > 0 ? Math.max(...resources.map(r => r.id)) + 1 : 1,
+    title,
+    subject,
+    category,
+    description,
+    author,
+    date: new Date().toISOString().split('T')[0],
+    downloads: 0,
+    rating: 0,
+    tags,
+    file: fileInput.files[0] ? fileInput.files[0].name : null
+  };
+  
+  // Add to resources array
+  resources.unshift(newResource);
+  
+  // Update localStorage
+  localStorage.setItem('studyHubResources', JSON.stringify(resources));
+  
+  // Show success message
+  const successMessage = document.createElement('div');
+  successMessage.className = 'alert alert-success';
+  successMessage.innerHTML = `
+    <i class="fas fa-check-circle"></i>
+    <p>Your resource "${title}" has been successfully uploaded!</p>
+    <a href="resources.html" class="btn btn-secondary">View in Resources</a>
+  `;
+  form.reset();
+  form.parentNode.insertBefore(successMessage, form);
+  
+  // Remove success message after 5 seconds
+  setTimeout(() => {
+    successMessage.remove();
+  }, 5000);
+  
+  return false;
+}
+
+// Populate Subjects Filter
+function populateSubjectFilter() {
+  const subjectFilter = document.getElementById('subjectFilter');
+  if (!subjectFilter) return;
+  
+  subjectFilter.innerHTML = '<option value="">All Subjects</option>';
+  
+  const subjects = [...new Set(resources.map(resource => resource.subject))].sort();
+  
+  subjects.forEach(subject => {
+    const option = document.createElement('option');
+    option.value = subject.toLowerCase();
+    option.textContent = subject;
+    subjectFilter.appendChild(option);
+  });
+}
+
+// Display Resources Function
+const itemsPerPage = 6;
+let currentPage = 1;
+
+function displayResources(filteredResources, page = 1) {
+  const resourcesContainer = document.getElementById('resourcesContainer');
+  const noResults = document.getElementById('noResults');
+  
+  if (!resourcesContainer || !noResults) return;
+  
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedResources = filteredResources.slice(startIndex, endIndex);
+  
+  resourcesContainer.innerHTML = '';
+  
+  if (filteredResources.length === 0) {
+    resourcesContainer.style.display = 'none';
+    noResults.style.display = 'block';
+    document.getElementById('pagination').style.display = 'none';
+    return;
+  }
+  
+  resourcesContainer.style.display = 'grid';
+  noResults.style.display = 'none';
+  
+  paginatedResources.forEach(resource => {
+    const card = document.createElement('div');
+    card.className = 'resource-card fade-in';
+    
+    let categoryIcon;
+    switch(resource.category) {
+      case 'notes': categoryIcon = 'fas fa-sticky-note'; break;
+      case 'presentations': categoryIcon = 'fas fa-file-powerpoint'; break;
+      case 'essays': categoryIcon = 'fas fa-file-alt'; break;
+      case 'summaries': categoryIcon = 'fas fa-file-contract'; break;
+      case 'exercises': categoryIcon = 'fas fa-tasks'; break;
+      case 'exams': categoryIcon = 'fas fa-file-signature'; break;
+      default: categoryIcon = 'fas fa-file';
+    }
+    
+    card.innerHTML = `
+      <div class="resource-header">
+        <span class="resource-category">${resource.category.charAt(0).toUpperCase() + resource.category.slice(1)}</span>
+        <div class="resource-icon"><i class="${categoryIcon}"></i></div>
+        <h3 class="resource-title">${resource.title}</h3>
+        <p class="resource-subject">${resource.subject}</p>
+      </div>
+      <div class="resource-body">
+        <p class="resource-description">${resource.description}</p>
+        <div class="resource-meta">
+          <div class="meta-item">
+            <i class="fas fa-user meta-icon"></i>
+            <span>${resource.author}</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-calendar meta-icon"></i>
+            <span>${new Date(resource.date).toLocaleDateString()}</span>
+          </div>
+        </div>
+        <div class="resource-tags">
+          ${resource.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+        </div>
+      </div>
+      <div class="resource-footer">
+        <div class="rating">
+          <div class="stars">
+            ${getStars(resource.rating)}
+          </div>
+          <span>${resource.rating.toFixed(1)}</span>
+        </div>
+        <button class="download-btn" data-id="${resource.id}">
+          <i class="fas fa-download"></i> Download
+        </button>
+      </div>
+    `;
+    
+    resourcesContainer.appendChild(card);
+  });
+  
+  // Add event listeners to download buttons
+  document.querySelectorAll('.download-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const resourceId = parseInt(this.getAttribute('data-id'));
+      const resource = resources.find(r => r.id === resourceId);
+      
+      if (resource) {
+        // Increment downloads
+        resource.downloads++;
+        localStorage.setItem('studyHubResources', JSON.stringify(resources));
+        
+        // Show download initiated message
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `
+          <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon"></i>
+            <div>
+              <h4>Download Started</h4>
+              <p>${resource.title} is being downloaded</p>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(toast);
+        
+        // Remove toast after 3 seconds
+        setTimeout(() => {
+          toast.remove();
+        }, 3000);
+        
+        // In a real app, you would trigger the actual file download here
+      }
+    });
+  });
+  
+  // Update pagination
+  updatePagination(filteredResources.length);
+}
+
+// Generate star rating HTML
+function getStars(rating) {
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 >= 0.5;
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+  
+  let starsHTML = '';
+  
+  for (let i = 0; i < fullStars; i++) {
+    starsHTML += '<i class="fas fa-star"></i>';
+  }
+  
+  if (halfStar) {
+    starsHTML += '<i class="fas fa-star-half-alt"></i>';
+  }
+  
+  for (let i = 0; i < emptyStars; i++) {
+    starsHTML += '<i class="far fa-star"></i>';
+  }
+  
+  return starsHTML;
+}
+
+// Update pagination
+function updatePagination(totalItems) {
+  const pagination = document.getElementById('pagination');
+  if (!pagination) return;
+  
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  
+  if (totalPages <= 1) {
+    pagination.style.display = 'none';
+    return;
+  }
+  
+  pagination.style.display = 'flex';
+  pagination.innerHTML = '';
+  
+  // Previous button
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'page-btn';
+  prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+  prevBtn.disabled = currentPage === 1;
+  prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      applyFilters();
+    }
+  });
+  pagination.appendChild(prevBtn);
+  
+  // Page buttons
+  for (let i = 1; i <= totalPages; i++) {
+    const pageBtn = document.createElement('button');
+    pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+    pageBtn.textContent = i;
+    pageBtn.addEventListener('click', () => {
+      currentPage = i;
+      applyFilters();
+    });
+    pagination.appendChild(pageBtn);
+  }
+  
+  // Next button
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'page-btn';
+  nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+  nextBtn.disabled = currentPage === totalPages;
+  nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      applyFilters();
+    }
+  });
+  pagination.appendChild(nextBtn);
+}
+
+// Apply Filters Function
+function applyFilters() {
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const subjectFilter = document.getElementById('subjectFilter');
+  const sortBy = document.getElementById('sortBy');
+  
+  if (!searchInput || !categoryFilter || !subjectFilter || !sortBy) return;
+  
+  const searchTerm = searchInput.value.toLowerCase();
+  const categoryValue = categoryFilter.value;
+  const subjectValue = subjectFilter.value;
+  const sortByValue = sortBy.value;
+  
+  let filteredResources = resources.filter(resource => {
+    const matchesSearch = resource.title.toLowerCase().includes(searchTerm) || 
+                         resource.description.toLowerCase().includes(searchTerm) ||
+                         resource.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+    
+    const matchesCategory = categoryValue === '' || resource.category === categoryValue;
+    const matchesSubject = subjectValue === '' || resource.subject.toLowerCase() === subjectValue;
+    
+    return matchesSearch && matchesCategory && matchesSubject;
+  });
+  
+  // Apply sorting
+  switch(sortByValue) {
+    case 'newest':
+      filteredResources.sort((a, b) => new Date(b.date) - new Date(a.date));
+      break;
+    case 'oldest':
+      filteredResources.sort((a, b) => new Date(a.date) - new Date(b.date));
+      break;
+    case 'name-asc':
+      filteredResources.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+    case 'name-desc':
+      filteredResources.sort((a, b) => b.title.localeCompare(a.title));
+      break;
+    case 'downloads':
+      filteredResources.sort((a, b) => b.downloads - a.downloads);
+      break;
+    case 'rating':
+      filteredResources.sort((a, b) => b.rating - a.rating);
+      break;
+  }
+  
+  displayResources(filteredResources, currentPage);
+}
+
+// Event Listeners for Resources Page
+function setupResourcesPageListeners() {
+  const searchInput = document.getElementById('searchInput');
+  const categoryFilter = document.getElementById('categoryFilter');
+  const subjectFilter = document.getElementById('subjectFilter');
+  const sortBy = document.getElementById('sortBy');
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      currentPage = 1;
+      applyFilters();
+    });
+  }
+  
+  if (categoryFilter) {
+    categoryFilter.addEventListener('change', () => {
+      currentPage = 1;
+      applyFilters();
+    });
+  }
+  
+  if (subjectFilter) {
+    subjectFilter.addEventListener('change', () => {
+      currentPage = 1;
+      applyFilters();
+    });
+  }
+  
+  if (sortBy) {
+    sortBy.addEventListener('change', applyFilters);
+  }
+}
+
+// Toast notification system
+function showToast(message, type = 'success') {
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.innerHTML = `
+    <div class="toast-content">
+      <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} toast-icon"></i>
+      <p>${message}</p>
     </div>
   `;
+  document.body.appendChild(toast);
   
-  return card;
+  // Remove after 3 seconds
+  setTimeout(() => {
+    toast.classList.add('toast-hide');
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
 }
 
-// Initialize scroll animations
-function initScrollAnimations() {
-  // Observer for scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-  
-  // Observe elements with scroll-reveal class
-  document.querySelectorAll('.scroll-reveal').forEach(element => {
-    observer.observe(element);
-  });
-  
-  // Add scroll event listener for navbar
-  const header = document.querySelector('header');
-  let lastScrollTop = 0;
-  
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (scrollTop > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-    
-    if (scrollTop > lastScrollTop) {
-      // Scrolling down
-      header.classList.add('hidden');
-    } else {
-      // Scrolling up
-      header.classList.remove('hidden');
-    }
-    
-    lastScrollTop = scrollTop;
-  });
-  
-  // Initialize smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      
-      const target = document.querySelector(targetId);
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-  
-  // Add scroll animations to sections
-  const sections = document.querySelectorAll('section');
-  sections.forEach(section => {
-    observer.observe(section);
-    section.classList.add('scroll-reveal');
-  });
-  
-  // Add animation to pagination
-  const pagination = document.querySelector('.pagination');
-  if (pagination) {
-    observer.observe(pagination);
-    pagination.classList.add('scroll-reveal');
-  }
-  
-  // Add hover animations
-  addHoverEffects();
-}
-
-// Add hover effects
-function addHoverEffects() {
-  // Button hover effects
-  const buttons = document.querySelectorAll('.btn');
-  buttons.forEach(button => {
-    button.addEventListener('mouseenter', function() {
-      this.classList.add('btn-hover');
-    });
-    
-    button.addEventListener('mouseleave', function() {
-      this.classList.remove('btn-hover');
-    });
-  });
-  
-  // Resource card hover effects
-  document.addEventListener('mouseover', function(e) {
-    const card = e.target.closest('.resource-card');
-    if (card) {
-      card.classList.add('card-hover');
-    }
-  });
-  
-  document.addEventListener('mouseout', function(e) {
-    const card = e.target.closest('.resource-card');
-    if (card) {
-      card.classList.remove('card-hover');
-    }
-  });
-  
-  // Navigation item hover effects
-  const navItems = document.querySelectorAll('.nav-item');
-  navItems.forEach(item => {
-    item.addEventListener('mouseenter', function() {
-      this.classList.add('nav-hover');
-    });
-    
-    item.addEventListener('mouseleave', function() {
-      this.classList.remove('nav-hover');
-    });
+// Check if we're on resources page and initialize
+if (window.location.pathname.includes('resources.html')) {
+  window.addEventListener('load', () => {
+    populateSubjectFilter();
+    setupResourcesPageListeners();
+    displayResources(resources);
   });
 }
 
-// Handle pagination
-document.addEventListener('click', function(e) {
-  if (e.target.closest('.page-btn')) {
-    const buttons = document.querySelectorAll('.page-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    
-    const clickedBtn = e.target.closest('.page-btn');
-    clickedBtn.classList.add('active');
-    
-    // Simulate loading of new page
-    simulateLoading();
-    
-    // Scroll to top of results
-    const resultsContainer = document.querySelector('.results-container');
-    if (resultsContainer) {
-      resultsContainer.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+// Check if we're on upload page and setup form
+if (window.location.pathname.includes('upload.html')) {
+  window.addEventListener('load', () => {
+    const uploadForm = document.getElementById('uploadForm');
+    if (uploadForm) {
+      uploadForm.addEventListener('submit', handleResourceUpload);
     }
-  }
-});
-
-// Handle sort dropdown changes
-const sortDropdown = document.getElementById('sort');
-if (sortDropdown) {
-  sortDropdown.addEventListener('change', function() {
-    console.log('Sorting by:', this.value);
-    simulateLoading();
   });
 }
 
-// Filter search functionality
-const filterSearchInputs = document.querySelectorAll('.filter-search input');
-filterSearchInputs.forEach(input => {
-  input.addEventListener('input', function() {
-    const searchTerm = this.value.toLowerCase();
-    const filterOptions = this.closest('.filter-group').querySelectorAll('.filter-option span:first-of-type');
+// Export functions for use in other pages
+window.StudyHub = {
+  handleResourceUpload,
+  showToast
+};
     
-    filterOptions.forEach(option => {
-      const text = option.textContent.toLowerCase();
-      const optionItem = option.closest('.filter-option');
-      
-      if (text.includes(searchTerm)) {
-        optionItem.style.display = 'flex';
-      } else {
-        optionItem.style.display = 'none';
-      }
-    });
-  });
-});
-    </script>
+  </script>
 </body>
 </html>

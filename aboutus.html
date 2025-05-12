@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - StudyHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4e6bff;
+      --primary-dark: #3a56e8;
+      --secondary-color: #ff6b6b;
+      --text-color: #333333;
+      --text-light: #777777;
+      --bg-color: #ffffff;
+      --bg-light: #f8f9fa;
+      --border-color: #e6e6e6;
+      --success-color: #28a745;
+      --font-main: 'Poppins', sans-serif;
+      --transition: all 0.3s ease;
+    }
+
+    .dark-theme {
+      --primary-color: #6c8fff;
+      --primary-dark: #5a7dff;
+      --text-color: #f0f0f0;
+      --text-light: #bbbbbb;
+      --bg-color: #121212;
+      --bg-light: #1e1e1e;
+      --border-color: #2d2d2d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+
+    .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+    /* Header */
+    header {
+      background-color: var(--bg-color);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: var(--transition);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 1.5rem;
+
+}
+    .logo:hover {
+        transform: scale(1.05);
+}
+
+    .logo-icon {
+      margin-right: 10px;
+      font-size: 1.8rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      
+    }
+
+    .nav-item {
+      margin: 0 15px;
+      
+    }
+
+    .nav-item a {
+      text-decoration: none;
+      color: var(--text-color);
+      position: relative;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+
+    .nav-item a:hover {
+      color: var(--primary-color);
+    }
+
+    .nav-item a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: var(--transition);
+}
+
+.nav-item a:hover::after {
+  width: 100%;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      font-size: 0.9rem;
+      margin-left: 10px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(77, 97, 252, 0.3);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--bg-light);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+      font-size: 1.2rem;
+      margin-left: 15px;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background-color: var(--bg-color);
+      z-index: 1000;
+      padding: 20px;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-close {
+      align-self: flex-end;
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 30px;
+    }
+
+    .mobile-nav-item {
+      padding: 15px 0;
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .mobile-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: none;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* About Hero Section */
+    .about-hero {
+      padding: 100px 0 80px;
+      background-color: var(--bg-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 50px;
+    }
+
+    .about-hero-content {
+      flex: 1;
+    }
+
+    .about-hero-title {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .about-hero-title span {
+      color: var(--primary-color);
+    }
+
+    .about-hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+
+    .about-hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Mission Section */
+    .mission {
+      padding: 80px 0;
+    }
+
+    .mission-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .mission-header {
+      max-width: 800px;
+      margin-bottom: 50px;
+    }
+
+    .mission-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .mission-content {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .mission-card {
+      background-color: var(--bg-light);
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      flex: 1;
+      min-width: 300px;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .mission-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .mission-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .mission-card-title {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+
+    .mission-description {
+      color: var(--text-light);
+    }
+
+    /* Team Section */
+    .team {
+      padding: 80px 0;
+      background-color: var(--bg-light);
+    }
+
+    .team-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 50px;
+    }
+
+    .team-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .team-subtitle {
+      color: var(--text-light);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .team-card {
+      background-color: var(--bg-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-image {
+      height: 250px;
+      width: 100%;
+      background-color: #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-image i {
+      font-size: 5rem;
+      color: var(--text-light);
+      
+    }
+
+    .team-info {
+      padding: 20px;
+    }
+
+    .team-name {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .team-role {
+      color: var(--primary-color);
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .team-bio {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .team-social {
+      display: flex;
+      gap: 10px;
+    }
+
+    .team-social a {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .team-social a:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    /* Journey Section */
+    .journey {
+      padding: 80px 0;
+    }
+
+    .journey-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 50px;
+    }
+
+    .journey-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .journey-subtitle {
+      color: var(--text-light);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: var(--primary-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-content {
+      padding: 20px;
+      background-color: var(--bg-light);
+      position: relative;
+      border-radius: 6px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -15px;
+      background-color: var(--bg-light);
+      top: 15px;
+      z-index: 1;
+      transform: rotate(45deg);
+    }
+
+    .timeline-item:nth-child(even) .timeline-content::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      left: -15px;
+      background-color: var(--bg-light);
+      top: 15px;
+      z-index: 1;
+      transform: rotate(45deg);
+    }
+
+    .timeline-dot {
+      width: 20px;
+      height: 20px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      position: absolute;
+      top: 20px;
+      z-index: 10;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      right: -10px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -10px;
+    }
+
+    .timeline-date {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .timeline-title {
+      margin-bottom: 10px;
+    }
+
+    .timeline-description {
+      color: var(--text-light);
+    }
+
+    /* Values Section */
+    .values {
+      padding: 80px 0;
+      background-color: var(--bg-light);
+    }
+
+    .values-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 50px;
+    }
+
+    .values-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .values-subtitle {
+      color: var(--text-light);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .value-card {
+      background-color: var(--bg-color);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border-top: 4px solid var(--primary-color);
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .value-icon {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .value-title {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+
+    .value-description {
+      color: var(--text-light);
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 80px 0;
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .cta-container {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .cta-text {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .cta-btn {
+      padding: 12px 30px;
+    }
+
+    .btn-light {
+      background-color: white;
+      color: var(--primary-color);
+    }
+
+    .btn-light:hover {
+      background-color: #f0f0f0;
+    }
+
+    .btn-outline-light {
+      background-color: transparent;
+      color: white;
+      border: 1px solid white;
+    }
+
+    .btn-outline-light:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--bg-light);
+      padding: 60px 0 20px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3,
+    .footer-column h4 {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .footer-column h3::after,
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      height: 2px;
+      width: 50px;
+      background-color: var(--primary-color);
+    }
+
+    .footer-column p {
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--bg-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-icons a:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column ul li a {
+      text-decoration: none;
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .footer-column ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-form input {
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .about-hero-container {
+        flex-direction: column;
+      }
+
+      .about-hero-image {
+        order: -1;
+      }
+
+      .about-hero-content {
+        text-align: center;
+      }
+
+      .about-hero-subtitle {
+        margin: 0 auto 30px;
+      }
+
+      .timeline::after {
+        left: 31px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 0;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content::after,
+      .timeline-item:nth-child(even) .timeline-content::after {
+        left: -15px;
+        right: auto;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: 21px;
+        right: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu,
+      .nav-buttons {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-book-open logo-icon"></i>
+        <span class="logo-text">StudyHub</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="resources.html">Resources</a></li>
+          <li class="nav-item"><a href="upload.html">Upload</a></li>
+          <li class="nav-item"><a href="about.html">About</a></li>
+          <li class="nav-item"><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-buttons">
+        <button class="btn btn-outline"><a href="login.html">Log In</a></button>
+        <button class="btn btn-primary">Sign Up</button>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose">
+      <i class="fas fa-times"></i>
+    </button>
+    <nav class="mobile-nav">
+      <a href="index.html" class="mobile-nav-item">Home</a>
+      <a href="resources.html" class="mobile-nav-item">Resources</a>
+      <a href="upload.html" class="mobile-nav-item">Upload</a>
+      <a href="about.html" class="mobile-nav-item">About</a>
+      <a href="contact.html" class="mobile-nav-item">Contact</a>
+    </nav>
+    <div class="mobile-buttons">
+      <button class="btn btn-outline">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- About Hero Section -->
+  <section class="about-hero">
+    <div class="container about-hero-container">
+      <div class="about-hero-content">
+        <h1 class="about-hero-title">About <span>StudyHub</span></h1>
+        <p class="about-hero-subtitle">Founded in 2022, StudyHub is a platform created by students, for students. We're on a mission to democratize education by making high-quality study resources accessible to everyone.</p>
+      </div>
+      <div class="about-hero-image">
+        <img src="StudyHub.png" alt="StudyHub Team">
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission">
+    <div class="container mission-container">
+      <div class="mission-header">
+        <h2 class="mission-title">Our Mission</h2>
+        <p>At StudyHub, we believe that knowledge should be accessible to everyone. Our platform serves as a bridge connecting students and educators, enabling the free flow of educational resources across disciplines and borders.</p>
+      </div>
+      <div class="mission-content">
+        <div class="mission-card">
+          <i class="fas fa-users mission-icon"></i>
+          <h3 class="mission-card-title">Community-Driven Learning</h3>
+          <p class="mission-description">We're building a global community where students and educators collaborate to enhance the learning experience for everyone.</p>
+        </div>
+        <div class="mission-card">
+          <i class="fas fa-universal-access mission-icon"></i>
+          <h3 class="mission-card-title">Equal Access</h3>
+          <p class="mission-description">We're committed to breaking down barriers to education by providing free access to quality learning materials for students worldwide.</p>
+        </div>
+        <div class="mission-card">
+          <i class="fas fa-award mission-icon"></i>
+          <h3 class="mission-card-title">Quality Education</h3>
+          <p class="mission-description">We maintain high standards for all resources on our platform, ensuring students get accurate and helpful materials.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="container">
+      <div class="team-header">
+        <h2 class="team-title">Meet Our Team</h2>
+        <p class="team-subtitle">StudyHub was founded by a diverse group of passionate educators and tech enthusiasts dedicated to transforming education through technology.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-image"><img src="StudyHub.png" alt="">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Kushagra Harit</h3>
+            <p class="team-role">Founder & CEO</p>
+            <p class="team-bio">Former professor with a passion for accessible education. Emily founded StudyHub after witnessing firsthand the disparity in educational resources among students.</p>
+            <div class="team-social">
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-image">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Marcus Johnson</h3>
+            <p class="team-role">CTO</p>
+            <p class="team-bio">Tech innovator with a background in educational technology. Marcus oversees the technical development of the StudyHub platform.</p>
+            <div class="team-social">
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-image">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">Sarah Rodriguez</h3>
+            <p class="team-role">Head of Content</p>
+            <p class="team-bio">Former curriculum developer with expertise in educational content. Sarah ensures all materials on StudyHub meet high academic standards.</p>
+            <div class="team-social">
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-image">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="team-info">
+            <h3 class="team-name">David Kim</h3>
+            <p class="team-role">Community Manager</p>
+            <p class="team-bio">Former teacher with a focus on building educational communities. David helps nurture our global network of students and educators.</p>
+            <div class="team-social">
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey Section -->
+  <section class="journey">
+    <div class="container">
+      <div class="journey-header">
+        <h2 class="journey-title">Our Journey</h2>
+        <p class="journey-subtitle">From a small project to a global educational platform, here's how StudyHub has evolved over the years.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <p class="timeline-date">2022</p>
+            <h3 class="timeline-title">The Beginning</h3>
+            <p class="timeline-description">StudyHub started as a small project at a university hackathon, winning first place for innovation in education.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <p class="timeline-date">2023</p>
+            <h3 class="timeline-title">Growing Community</h3>
+            <p class="timeline-description">StudyHub expanded to serve over 5,000 students across 50 universities, with our first major partnerships with educational institutions.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <p class="timeline-date">2024</p>
+            <h3 class="timeline-title">Platform Expansion</h3>
+            <p class="timeline-description">We launched our mobile app and expanded our resource library to cover over 100 subjects across all educational levels.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <p class="timeline-date">2025</p>
+            <h3 class="timeline-title">Global Impact</h3>
+            <p class="timeline-description">Today, StudyHub serves over 15,000 active users worldwide, with resources in multiple languages and partnerships with educational institutions across the globe.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values">
+    <div class="container">
+      <div class="values-header">
+        <h2 class="values-title">Our Core Values</h2>
+        <p class="values-subtitle">These principles guide everything we do at StudyHub, from platform development to community engagement.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <i class="fas fa-handshake value-icon"></i>
+          <h3 class="value-title">Collaboration</h3>
+          <p class="value-description">We believe in the power of shared knowledge and collective learning. Our platform thrives on the contributions of our diverse community.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-balance-scale value-icon"></i>
+          <h3 class="value-title">Equity</h3>
+          <p class="value-description">We're committed to leveling the educational playing field by making quality resources accessible to all students, regardless of background.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-check-circle value-icon"></i>
+          <h3 class="value-title">Quality</h3>
+          <p class="value-description">We maintain high standards for all content on our platform, ensuring students can trust the resources they find on StudyHub.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-lightbulb value-icon"></i>
+          <h3 class="value-title">Innovation</h3>
+          <p class="value-description">We continuously seek new ways to improve the learning experience through technology and community-driven solutions.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-globe value-icon"></i>
+          <h3 class="value-title">Inclusivity</h3>
+          <p class="value-description">We celebrate diversity in our community and strive to make our platform welcoming and accessible to everyone.</p>
+        </div>
+        <div class="value-card">
+          <i class="fas fa-shield-alt value-icon"></i>
+          <h3 class="value-title">Integrity</h3>
+          <p class="value-description">We operate with transparency and honesty, respecting intellectual property and promoting academic integrity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-container">
+        <h2 class="cta-title">Join Our Educational Community</h2>
+        <p class="cta-text">Become part of a global network of students and educators who are transforming education through resource sharing and collaboration.</p>
+        <div class="cta-buttons">
+          <button class="btn btn-light cta-btn">Sign Up Today</button>
+          <button class="btn btn-outline-light cta-btn">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>StudyHub</h3>
+          <p>Share knowledge, grow together. The premier platform for students and educators to exchange study materials.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="upload.html">Upload</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Content Guidelines</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Subscribe</h4>
+          <p>Get the latest updates and offers.</p>
+          <form class="footer-form">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 StudyHub. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    document.getElementById('mobileToggle').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.add('active');
+      document.getElementById('overlay').classList.add('active');
+    });
+
+    document.getElementById('mobileClose').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    });
+
+    document.getElementById('overlay').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    });
+
+    // Theme Toggle
+    document.getElementById('themeToggle').addEventListener('click', function() {
+      document.body.classList.toggle('dark-theme');
+      const icon = this.querySelector('i');
+      
+      if (document.body.classList.contains('dark-theme')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Check for saved theme preference
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme');
+      const themeToggle = document.getElementById('themeToggle');
+      const icon = themeToggle.querySelector('i');
+      
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    });
+  </script>
